@@ -1,7 +1,7 @@
 {
-	"name": "helloworld",
-	"displayName": "helloworld",
-	"description": "hello",
+	"name": "snippet-add-easy",
+	"displayName": "snippet-add-easy",
+	"description": "snippet is easy",
 	"version": "0.0.1",
 	"publisher": "aokabi",
 	"engines": {
