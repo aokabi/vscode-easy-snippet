@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { readFile, readFileSync, writeFile } from 'fs';
+import { stringify } from 'querystring';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -35,7 +36,10 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.executeCommand("vscode.open", vscode.Uri.file(snippetFilePath));
 		//中身jsonだからいい感じに追加できそうな気がしてきた
 		let snippet = readFileSync(vscode.Uri.file(snippetFilePath).fsPath).toString();
-		let snippetObj = eval("(" + snippet.toString() + ")");
+		if (snippet.length === 0) {
+			snippet = "{}";
+		}
+		let snippetObj = JSON.parse(snippet.toString());
 		snippetObj.title = new Snippet(selectedText.split("\r\n"));
 		let snippetString = JSON.stringify(snippetObj, null, "\t");
 		writeFile(vscode.Uri.file(snippetFilePath).fsPath, snippetString, () => { });
