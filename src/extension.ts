@@ -40,7 +40,12 @@ export function activate(context: vscode.ExtensionContext) {
 			snippet = "{}";
 		}
 		let snippetObj = JSON.parse(snippet.toString());
-		snippetObj['{title}'] = new Snippet(selectedText.split("\r\n"));
+		for (let i = 0; ; i++) {
+			if (!(`{enter title${i}}` in snippetObj)) {
+				snippetObj[`{enter title${i}}`] = new Snippet(selectedText.split("\r\n"));
+				break;
+			}
+		}
 		let snippetString = JSON.stringify(snippetObj, null, "\t");
 		writeFile(vscode.Uri.file(snippetFilePath).fsPath, snippetString, () => { });
 	};
