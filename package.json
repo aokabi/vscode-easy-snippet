@@ -22,10 +22,6 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
-			},
-			{
 				"command": "extension.addSnippet",
 				"title": "Add Snippet"
 			}
