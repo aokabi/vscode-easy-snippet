@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
 			snippet = "{}";
 		}
 		let snippetObj = JSON.parse(snippet.toString());
-		snippetObj.title = new Snippet(selectedText.split("\r\n"));
+		snippetObj['{title}'] = new Snippet(selectedText.split("\r\n"));
 		let snippetString = JSON.stringify(snippetObj, null, "\t");
 		writeFile(vscode.Uri.file(snippetFilePath).fsPath, snippetString, () => { });
 	};
@@ -55,9 +55,9 @@ export function deactivate() {
 }
 
 class Snippet {
-	prefix: string = "default prefix";
+	prefix: string = "{enter prefix}";
 	body: Array<string>;
-	description: string = "";
+	description: string = "{enter description}";
 	constructor(body: Array<string>) {
 		this.body = body;
 	}
